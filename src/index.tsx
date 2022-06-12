@@ -7,7 +7,6 @@ const App = () => {
 	return (
 		<>
 			<CodeCell></CodeCell>
-			<CodeCell></CodeCell>
 		</>
 	);
 };

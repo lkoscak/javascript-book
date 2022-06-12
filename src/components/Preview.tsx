@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import "./preview.css";
 
 interface IPreviewProps {
 	code: string;
@@ -29,16 +30,20 @@ const Preview: React.FC<IPreviewProps> = ({ code }) => {
 	const iframeRef = useRef<any>(null);
 	useEffect(() => {
 		iframeRef.current.srcdoc = html;
-		iframeRef.current.contentWindow.postMessage(code, "*");
+		setTimeout(() => {
+			iframeRef.current.contentWindow.postMessage(code, "*");
+		}, 50);
 	}, [code]);
 	return (
-		<iframe
-			ref={iframeRef}
-			title="code preview"
-			frameBorder="1"
-			srcDoc={html}
-			sandbox="allow-scripts"
-		></iframe>
+		<div className="preview-wrapper">
+			<iframe
+				ref={iframeRef}
+				title="code preview"
+				frameBorder="1"
+				srcDoc={html}
+				sandbox="allow-scripts"
+			></iframe>
+		</div>
 	);
 };
 
