@@ -3,6 +3,7 @@ import "./preview.css";
 
 interface IPreviewProps {
 	code: string;
+	error: string;
 }
 
 const html = `
@@ -11,22 +12,29 @@ const html = `
 		<body>
 			<div id="root"></div>
 			<script>
+				const handleError = (error) =>{
+					const root = document.querySelector('#root')
+					root.innerHTML = '<div style="color: red;"><h4>Runtime Error</h4>' + error + '</div>'
+					console.error(error)
+				};
 				window.addEventListener('message', (event) =>{
 					console.log(event.data)
 					try{
 						eval(event.data)
 					}catch(error){
-						const root = document.querySelector('#root')
-						root.innerHTML = '<div style="color: red;"><h4>Runtime Error</h4>' + error + '</div>'
-						console.error(error)
+						handleError(error);
 					}
 				}, false);
+				window.addEventListener('error', (event) =>{
+					event.preventDefault();
+					handleError(event.error);
+				});
 			</script>
 		</body>
 	</html>
 	`;
 
-const Preview: React.FC<IPreviewProps> = ({ code }) => {
+const Preview: React.FC<IPreviewProps> = ({ code, error }) => {
 	const iframeRef = useRef<any>(null);
 	useEffect(() => {
 		iframeRef.current.srcdoc = html;
@@ -43,6 +51,7 @@ const Preview: React.FC<IPreviewProps> = ({ code }) => {
 				srcDoc={html}
 				sandbox="allow-scripts"
 			></iframe>
+			{error && <div className="preview-error">{error}</div>}
 		</div>
 	);
 };
