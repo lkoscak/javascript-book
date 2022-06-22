@@ -31,12 +31,12 @@ const bundle = async (rawCode: string) => {
 		});
 		return {
 			code: result.outputFiles[0].text,
-			err: "",
+			error: "",
 		};
 	} catch (error: any) {
 		return {
 			code: "",
-			err: error.message,
+			error: error.message,
 		};
 	}
 };

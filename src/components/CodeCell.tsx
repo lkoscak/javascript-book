@@ -1,38 +1,47 @@
-import { useState, useEffect } from "react";
-import bundle from "../bundler";
+import { useEffect } from "react";
+import { ICell } from "../state";
+import { useActions } from "../hooks/useActions";
+import { useTypedSelector } from "../hooks/useTypedSelector";
 
 import CodeEditor from "./CodeEditor";
 import Preview from "./Preview";
 import Resizable from "./Resizable";
 
-const CodeCell = () => {
-	const [input, setInput] = useState("");
-	const [code, setCode] = useState("");
-	const [error, setError] = useState("");
+interface ICodeCellProps {
+	cell: ICell;
+}
 
+const CodeCell: React.FC<ICodeCellProps> = ({ cell }) => {
+	const { updateCell, createBundle } = useActions();
+	const bundle = useTypedSelector((state) => state.bundles[cell.id]);
 	useEffect(() => {
 		const timer: any = setTimeout(async () => {
-			const result = await bundle(input);
-			setCode(result.code);
-			setError(result.err);
+			createBundle(cell.id, cell.content);
 		}, 750);
+
 		return () => {
 			clearTimeout(timer);
 		};
-	}, [input]);
+	}, [cell.content, cell.id]);
 
 	return (
 		<Resizable direction="vertical">
-			<div style={{ height: "100%", display: "flex", flexDirection: "row" }}>
+			<div
+				style={{
+					height: "calc(100% - 10px)",
+					display: "flex",
+					flexDirection: "row",
+				}}
+			>
 				<Resizable direction="horizontal">
 					<CodeEditor
-						initialValue="const a = 1"
+						initialValue={cell.content}
 						onChange={(value) => {
-							setInput(value);
+							updateCell(cell.id, value);
 						}}
 					></CodeEditor>
 				</Resizable>
-				<Preview code={code} error={error}></Preview>
+				{bundle && <Preview code={bundle.code} error={bundle.error}></Preview>}
 			</div>
 		</Resizable>
 	);
