@@ -12,10 +12,17 @@ store.dispatch({
 		type: "code",
 	},
 });
-store.dispatch({
+/* store.dispatch({
 	type: ActionType.INSERT_CELL_AFTER,
 	payload: {
 		id: null,
 		type: "text",
+	},
+}); */
+store.dispatch({
+	type: ActionType.INSERT_CELL_AFTER,
+	payload: {
+		id: null,
+		type: "code",
 	},
 });
