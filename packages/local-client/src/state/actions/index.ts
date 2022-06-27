@@ -1,4 +1,4 @@
-import { CellTypes, Direction } from "./../cell";
+import { CellTypes, Direction, ICell } from "./../cell";
 import { ActionType } from "../action-types";
 
 export interface IMoveCellAction {
@@ -44,10 +44,25 @@ export interface IBundleCompleteAction {
 	};
 }
 
+export interface IFetchCellsAction {
+	type: ActionType.FETCH_CELLS;
+}
+export interface IFetchCellsCompleteAction {
+	type: ActionType.FETCH_CELLS_COMPLETE;
+	payload: ICell[];
+}
+export interface IFetchCellsErrorAction {
+	type: ActionType.FETCH_CELLS_ERROR;
+	payload: string;
+}
+
 export type Action =
 	| IMoveCellAction
 	| IDeleteCellAction
 	| IUpdateCellAction
 	| IInsertCellAfterAction
 	| IBundleStartAction
-	| IBundleCompleteAction;
+	| IBundleCompleteAction
+	| IFetchCellsAction
+	| IFetchCellsCompleteAction
+	| IFetchCellsErrorAction;

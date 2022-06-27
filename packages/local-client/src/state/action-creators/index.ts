@@ -1,5 +1,6 @@
 import { Dispatch } from "redux";
-import { CellTypes, Direction } from "./../cell";
+import axios from "axios";
+import { CellTypes, Direction, ICell } from "./../cell";
 import { ActionType } from "../action-types";
 import {
 	Action,
@@ -63,5 +64,17 @@ export const createBundle = (cellId: string, input: string) => {
 				bundle: result,
 			},
 		});
+	};
+};
+
+export const fetchCells = () => {
+	return async (dispatch: Dispatch<Action>) => {
+		dispatch({ type: ActionType.FETCH_CELLS });
+		try {
+			const { data }: { data: ICell[] } = await axios.get("/cells");
+			dispatch({ type: ActionType.FETCH_CELLS_COMPLETE, payload: data });
+		} catch (error: any) {
+			dispatch({ type: ActionType.FETCH_CELLS_ERROR, payload: error.message });
+		}
 	};
 };
