@@ -17,7 +17,7 @@
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
-		"@jsrbook/local-client": "^1.0.1"
+		"@jsrbook/local-client": "^1.0.2"
 	},
 	"devDependencies": {
 		"@jsrbook/local-api": "^1.0.1",
