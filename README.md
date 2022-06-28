@@ -5,6 +5,7 @@ You can test it out by running
 ```sh
 npx jsnote serve
 ```
+in your terminal
 
 ![Preview](./screenshoot.png)
 
