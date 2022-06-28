@@ -20,7 +20,9 @@ export const serve = (
 			})
 		);
 	} else {
-		const packagePath = require.resolve("local-client/build/index.html");
+		const packagePath = require.resolve(
+			"@jsrbook/local-client/build/index.html"
+		);
 		app.use(express.static(path.dirname(packagePath)));
 	}
 

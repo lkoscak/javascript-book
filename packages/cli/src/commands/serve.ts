@@ -1,4 +1,4 @@
-import { serve } from "local-api";
+import { serve } from "@jsrbook/local-api";
 import path from "path";
 import { Command } from "commander";
 
