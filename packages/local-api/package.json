@@ -23,7 +23,7 @@
 		"typescript": "^4.7.4"
 	},
 	"dependencies": {
-		"@jsrbook/local-client": "^1.0.1",
+		"@jsrbook/local-client": "^1.0.2",
 		"cors": "^2.8.5",
 		"express": "^4.17.1",
 		"http-proxy-middleware": "^1.0.6"
