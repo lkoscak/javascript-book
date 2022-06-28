@@ -1,1 +1,1 @@
-[{"content":"show(3)","type":"code","id":"v37"},{"content":"dfdsfdsf","type":"text","id":"cuw"}]
+[{"content":"<h3>Array.prototype.map()\n\n\n----------\n\nThe map() method creates a new array populated with the results of calling a provided function on every element in the calling array.","type":"text","id":"31w"},{"content":"const array1 = [1, 4, 9, 16];\r\n\r\n// pass a function to map\r\nconst map1 = array1.map(x => x * 2);\r\n\r\nshow(`Result array: [${map1}]`);","type":"code","id":"kza"}]
