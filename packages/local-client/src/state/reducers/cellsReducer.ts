@@ -41,6 +41,10 @@ const reducer = produce(
 				state.error = action.payload;
 				return state;
 			}
+			case ActionType.SAVE_CELLS_ERROR: {
+				state.error = action.payload;
+				return state;
+			}
 			case ActionType.MOVE_CELL: {
 				const { id, direction } = action.payload;
 				const index = state.order.findIndex((cell) => cell === id);

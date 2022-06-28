@@ -1,3 +1,4 @@
+import { RootState } from "./../reducers/index";
 import { Dispatch } from "redux";
 import axios from "axios";
 import { CellTypes, Direction, ICell } from "./../cell";
@@ -75,6 +76,20 @@ export const fetchCells = () => {
 			dispatch({ type: ActionType.FETCH_CELLS_COMPLETE, payload: data });
 		} catch (error: any) {
 			dispatch({ type: ActionType.FETCH_CELLS_ERROR, payload: error.message });
+		}
+	};
+};
+
+export const saveCells = () => {
+	return async (dispatch: Dispatch<Action>, getState: () => RootState) => {
+		try {
+			const {
+				cells: { order, data },
+			} = getState();
+			const cells = order.map((id) => data[id]);
+			await axios.post("/cells", { cells });
+		} catch (error: any) {
+			dispatch({ type: ActionType.SAVE_CELLS_ERROR, payload: error.message });
 		}
 	};
 };

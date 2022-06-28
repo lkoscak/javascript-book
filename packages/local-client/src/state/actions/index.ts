@@ -56,6 +56,11 @@ export interface IFetchCellsErrorAction {
 	payload: string;
 }
 
+export interface ISaveCellsErrorAction {
+	type: ActionType.SAVE_CELLS_ERROR;
+	payload: string;
+}
+
 export type Action =
 	| IMoveCellAction
 	| IDeleteCellAction
@@ -65,4 +70,5 @@ export type Action =
 	| IBundleCompleteAction
 	| IFetchCellsAction
 	| IFetchCellsCompleteAction
-	| IFetchCellsErrorAction;
+	| IFetchCellsErrorAction
+	| ISaveCellsErrorAction;
